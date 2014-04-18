@@ -8,17 +8,22 @@ public class LineProcessorTest {
 
 	@Test
 	public void newGameLineTest() {
-		assertEquals("NEW_MATCH","23/04/2013 15:34:22 - New match 11348965 has started");
+		assertEquals(LineTypeEnum.NEW_MATCH, LineTypeEnum.NEW_MATCH.byLine("23/04/2013 15:34:22 - New match 11348965 has started"));
 	}
 
 	@Test
 	public void killLineTest() {
-		assertEquals("KILL","23/04/2013 15:36:04 - Roman killed Nick using M16");
+		assertEquals(LineTypeEnum.KILL, LineTypeEnum.KILL.byLine("23/04/2013 15:36:04 - Roman killed Nick using M16"));
 	}
 
 	@Test
-	public void andMatchLineTest() {
-		assertEquals("END_MATCH","23/04/2013 15:39:22 - Match 11348965 has ended");
+	public void endMatchLineTest() {
+		assertEquals(LineTypeEnum.END_MATCH, LineTypeEnum.END_MATCH.byLine("23/04/2013 15:39:22 - Match 11348965 has ended"));
 	}
 
+	@Test (expected	= IllegalArgumentException.class)
+	public void illegalLineTest() {
+		LineTypeEnum.NEW_MATCH.byLine("");
+	}
+	
 }
