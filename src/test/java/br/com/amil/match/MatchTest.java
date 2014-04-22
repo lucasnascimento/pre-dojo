@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
+import br.com.amil.match.model.Match;
 import br.com.amil.match.model.Matches;
 
 public class MatchTest {
@@ -16,7 +17,9 @@ public class MatchTest {
 		Matches matches = new Matches();
 		matches.loadFromFile(is);
 		assertEquals(1, matches.getMatches().size());
-		assertEquals(2, matches.getMatches().iterator().next().getKills().size());
+		Match match = matches.getMatches().iterator().next();
+		assertEquals(2, match.getKills().size());
+		assertEquals(2, match.getPlayersMap().size());
 	}
 
 	
