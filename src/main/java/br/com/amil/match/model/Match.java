@@ -14,6 +14,7 @@ public class Match {
 	private String matchId;
 	private Set<Kill> kills = new HashSet<Kill>();
 	private Map<String, PlayerStats> playersMap = new HashMap<String, PlayerStats>();
+	private String streaker;
 	
 	private String startDate;
 	private String endDate;
@@ -47,6 +48,13 @@ public class Match {
 
 					killer.getGunsMap().put(gunStats.getName(), gunStats);
 				}
+				
+				Integer streakCount = killer.getStreakStrikes().get(killer.getStreakCount());
+				if (streakCount == null)
+					killer.getStreakStrikes().put(killer.getStreakCount(), 1);
+				else
+					killer.getStreakStrikes().put(killer.getStreakCount(), streakCount++);
+				
 				this.getPlayersMap().put(killer.getName(), killer);
 			}
 			
@@ -59,14 +67,31 @@ public class Match {
 				killed.increaseKilled();
 			}
 			
+			killed.increaseStreakCount();
 			this.getPlayersMap().put(killed.getName(), killed);
+		}
+		findStreaker();
+		
+	}
+
+	private void findStreaker() {
+		
+		int lastStrike = 0;
+		
+		for (PlayerStats player : playersMap.values()){
+			
+			if (lastStrike <= player.findMajorStreak()){
+				streaker = player.getName();
+				lastStrike = player.findMajorStreak();
+			}
 		}
 	}
 
 	public String printMatchResume(){
+		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(String.format("Match %s \nPosition  - PlayerName (Kills,Killed)", matchId));
+		sb.append(String.format("Match %s \nPosition  - PlayerName (Kills/Killed)", matchId));
 		
 		int i = 0;
 		for (PlayerStats player : playersMap.values()){
@@ -74,9 +99,14 @@ public class Match {
 			
 			if ( i == 1){
 				if (player.getGunsMap().size() > 0)
-					sb.append(" Favorite GUN: ").append( player.getGunsMap().entrySet().iterator().next().getValue().getName() );
+					sb.append(" WINNER'S GUN(").append( player.getGunsMap().entrySet().iterator().next().getValue().getName() ).append(")");
 				if (player.getKilledCount() == 0)
 					sb.append(" AWARD (No killed Winner) ");
+
+			}
+			
+			if (player.getName().equals(streaker)){
+				sb.append(" AWARD (Streaker)");
 			}
 			
 			
