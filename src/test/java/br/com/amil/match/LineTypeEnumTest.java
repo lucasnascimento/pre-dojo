@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class LineProcessorTest {
+public class LineTypeEnumTest {
 	
 	final String NEW_MATCH_LINE 	= "23/04/2013 15:34:22 - New match 11348965 has started";
 	final String KILL_LINE 			= "23/04/2013 15:36:04 - Roman killed Nick using M16";

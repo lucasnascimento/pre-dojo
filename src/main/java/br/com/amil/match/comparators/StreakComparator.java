@@ -1,8 +1,14 @@
-package br.com.amil.match.model;
+package br.com.amil.match.comparators;
 
 import java.util.Comparator;
 import java.util.Map;
 
+/**
+ * Comparator to order Streaks Maps in Streak Counter Descendant 
+ * 
+ * @author Lucas
+ *
+ */
 public class StreakComparator implements Comparator<String> {
 
 	Map<String,Integer> map;

@@ -1,8 +1,16 @@
-package br.com.amil.match.model;
+package br.com.amil.match.comparators;
 
 import java.util.Comparator;
 import java.util.Map;
 
+import br.com.amil.match.model.PlayerStats;
+
+/**
+ * Comparator to order Players Maps in Kill Counter Descendant 
+ * 
+ * @author Lucas
+ *
+ */
 public class PlayerComparator implements Comparator<String> {
 
 	Map<String,PlayerStats> map;

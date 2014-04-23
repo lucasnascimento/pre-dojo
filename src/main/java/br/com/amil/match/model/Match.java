@@ -7,9 +7,17 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import br.com.amil.match.comparators.GunComparator;
+import br.com.amil.match.comparators.PlayerComparator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Behavior class for Match.
+ * 
+ * @author Lucas
+ *
+ */
 @Data @EqualsAndHashCode(of="matchId")
 public class Match {
 
@@ -27,6 +35,9 @@ public class Match {
 		this.setMatchId(values[1]);
 	}
 	
+	/**
+	 * Business method responsible by rules of awards and ranking position 
+	 */
 	public void endMatch(){
 		for (Kill kill_log : this.getKills()){
 			
@@ -99,11 +110,8 @@ public class Match {
 	private void findStreaker() {
 		
 		int lastStrike = 0;
-		
 		for (PlayerStats player : playersMap.values()){
-			
 			int playerMajorStreak = player.findMajorStreak();
-			
 			if (lastStrike <= playerMajorStreak ){
 				streaker = player.getName();
 				lastStrike = playerMajorStreak;
@@ -111,6 +119,10 @@ public class Match {
 		}
 	}
 
+	/**
+	 * Business method responsible to print Match's resume 
+	 * @return
+	 */
 	public String printMatchResume(){
 		
 		Comparator<String> playerComparator = new PlayerComparator(playersMap);

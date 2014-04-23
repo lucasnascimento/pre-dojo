@@ -5,9 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import br.com.amil.match.comparators.StreakComparator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * Domain class for Player Statistics.
+ * 
+ * @author Lucas
+ *
+ */
 @Data @EqualsAndHashCode(of="name")
 public class PlayerStats {
 
@@ -23,20 +30,32 @@ public class PlayerStats {
 	private String minuteKill = "";
 	private int minuteKillCount = 0;
 	
+	/**
+	 * Increases Kill Counter
+	 */
 	public void increaseKill(){
 		this.killCount ++;
 	}
 
+	/**
+	 * Increases Killed Counter
+	 */
 	public void increaseKilled(){
 		this.killedCount ++;
 	}
 	
+	/**
+	 * Increases Streak Counter
+	 */
 	public void increaseStreakCount(){
 		int _streakCount = Integer.parseInt(streakCount);
 		_streakCount++;
 		this.streakCount = ""+_streakCount;
 	}
 	
+	/**
+	 * Find major Streak for this player
+	 */
 	public int findMajorStreak(){
 		
 		Comparator<String> streakComparator = new StreakComparator(streakStrikes);
@@ -49,6 +68,9 @@ public class PlayerStats {
 		return 0;
 	}
 	
+	/**
+	 * Increases Minute Kill Counter
+	 */
 	public void increaseMinuteKillCount(){
 		this.minuteKillCount++;
 	}

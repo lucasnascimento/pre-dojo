@@ -1,8 +1,16 @@
-package br.com.amil.match.model;
+package br.com.amil.match.comparators;
 
 import java.util.Comparator;
 import java.util.Map;
 
+import br.com.amil.match.model.GunStats;
+
+/**
+ * Comparator to order Guns Maps in Kill Counter Descendant 
+ * 
+ * @author Lucas
+ *
+ */
 public class GunComparator implements Comparator<String> {
 
 	Map<String,GunStats> map;

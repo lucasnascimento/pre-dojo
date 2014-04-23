@@ -7,12 +7,11 @@ import java.io.InputStream;
 import org.junit.Test;
 
 import br.com.amil.match.model.Match;
-import br.com.amil.match.model.Matches;
 
-public class MatchTest {
+public class MatchesTest {
 
 	@Test
-	public void loadFromFileTest() {
+	public void loadFromFile1Test() {
 		InputStream is = this.getClass().getResourceAsStream("/game.log");
 		Matches matches = new Matches();
 		matches.loadFromFile(is);
@@ -23,12 +22,10 @@ public class MatchTest {
 	}
 	
 	@Test
-	public void load2FromFileTest() {
+	public void loadFromFile2Test() {
 		InputStream is = this.getClass().getResourceAsStream("/game2.log");
 		Matches matches = new Matches();
 		matches.loadFromFile(is);
 	}
-
-
 	
 }
