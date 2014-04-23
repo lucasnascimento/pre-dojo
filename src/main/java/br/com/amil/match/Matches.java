@@ -1,7 +1,6 @@
 package br.com.amil.match;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -36,8 +35,8 @@ public class Matches {
 			InputStream is = new FileInputStream(args[0]);
 			matches.loadFromFile(is);
 			
-		} catch (FileNotFoundException e) {
-			System.out.println("Usage: java -jar matches.jar PATH_TO_GAME_LOG_FILE");
+		} catch (Exception e) {
+			System.out.println("Usage: java -jar matches-VERSAO.jar PATH_TO_GAME_LOG_FILE");
 		}
 		
 	}
