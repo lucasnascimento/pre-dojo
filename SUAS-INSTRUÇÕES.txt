@@ -1,2 +1,12 @@
-Coloque aqui suas instruções ou comentários que ache útil/relevantes para possamos ler 
-quando estivermos avaliando a sua solução
+InstruÃ§Ãµes:
+
+Para montar o projeto no Eclipse serÃ¡ necessÃ¡rio instalar o Lambok
+	InstruÃ§Ãµes em: http://projectlombok.org/download.html
+	
+Para compilar os fontes baixados via Maven execute no shell: 
+	mvn clean package 
+	
+Para executar o Main execute no shell (usar como argumento seu arquivos de log):
+	java -jar target/match-1.0.jar src/test/resources/game2.log
+	
+Obrigado.
