@@ -1,21 +1,27 @@
 package br.com.amil.match.model;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data @EqualsAndHashCode(of="name")
-public class PlayerStats implements Comparable<PlayerStats> {
-	
+public class PlayerStats {
+
 	private String name;
 	private int killCount = 0;
 	private int killedCount = 0;
 	private Map<String, GunStats> gunsMap = new HashMap<String, GunStats>(); 
 	
-	private Integer streakCount = 0;
-	private Map<Integer,Integer> streakStrikes = new HashMap<Integer, Integer>();
+	private String streakCount = "0";
+	private Map<String,Integer> streakStrikes = new HashMap<String, Integer>();
+	
+	private boolean killeInstinct;
+	private String minuteKill = "";
+	private int minuteKillCount = 0;
 	
 	public void increaseKill(){
 		this.killCount ++;
@@ -26,21 +32,25 @@ public class PlayerStats implements Comparable<PlayerStats> {
 	}
 	
 	public void increaseStreakCount(){
-		this.streakCount++;
+		int _streakCount = Integer.parseInt(streakCount);
+		_streakCount++;
+		this.streakCount = ""+_streakCount;
 	}
 	
 	public int findMajorStreak(){
-		int lastStreak = 0;
-		for (int count : streakStrikes.values()){
-			if (lastStreak < count)
-				lastStreak = count;
-		}
-		return lastStreak;
+		
+		Comparator<String> streakComparator = new StreakComparator(streakStrikes);
+		Map<String,Integer> streakStrikesSorted = new TreeMap<String, Integer>(streakComparator);
+		streakStrikesSorted.putAll(streakStrikes);
+		
+		if (streakStrikesSorted.size() > 0 )
+			return 	streakStrikesSorted.values().iterator().next();
+		
+		return 0;
 	}
 	
-	@Override
-	public int compareTo(PlayerStats other) {
-		return this.killCount - other.killCount;
+	public void increaseMinuteKillCount(){
+		this.minuteKillCount++;
 	}
 	
 }

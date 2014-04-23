@@ -21,6 +21,14 @@ public class MatchTest {
 		assertEquals(2, match.getKills().size());
 		assertEquals(2, match.getPlayersMap().size());
 	}
+	
+	@Test
+	public void load2FromFileTest() {
+		InputStream is = this.getClass().getResourceAsStream("/game2.log");
+		Matches matches = new Matches();
+		matches.loadFromFile(is);
+	}
+
 
 	
 }

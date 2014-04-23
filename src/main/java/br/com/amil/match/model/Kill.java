@@ -27,6 +27,11 @@ public class Kill implements Comparable<Kill> {
 		this.setGun(values[3]);
 	}
 	
+	@SuppressWarnings("deprecation")
+	public String getKillMinute(){
+		return killDate.getHours()+""+killDate.getMinutes();
+	}
+	
 	@Override
 	public int compareTo(Kill other) {
 		return this.killDate.compareTo(other.killDate);
